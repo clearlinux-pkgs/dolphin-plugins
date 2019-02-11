@@ -5,18 +5,18 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : dolphin-plugins
-Version  : 18.08.0
-Release  : 1
-URL      : https://download.kde.org/stable/applications/18.08.0/src/dolphin-plugins-18.08.0.tar.xz
-Source0  : https://download.kde.org/stable/applications/18.08.0/src/dolphin-plugins-18.08.0.tar.xz
-Source99 : https://download.kde.org/stable/applications/18.08.0/src/dolphin-plugins-18.08.0.tar.xz.sig
-Summary  : No detailed summary available
+Version  : 18.12.2
+Release  : 2
+URL      : https://download.kde.org/stable/applications/18.12.2/src/dolphin-plugins-18.12.2.tar.xz
+Source0  : https://download.kde.org/stable/applications/18.12.2/src/dolphin-plugins-18.12.2.tar.xz
+Source99 : https://download.kde.org/stable/applications/18.12.2/src/dolphin-plugins-18.12.2.tar.xz.sig
+Summary  : Extra Dolphin plugins
 Group    : Development/Tools
 License  : GPL-2.0
-Requires: dolphin-plugins-lib
-Requires: dolphin-plugins-data
-Requires: dolphin-plugins-license
-Requires: dolphin-plugins-locales
+Requires: dolphin-plugins-data = %{version}-%{release}
+Requires: dolphin-plugins-lib = %{version}-%{release}
+Requires: dolphin-plugins-license = %{version}-%{release}
+Requires: dolphin-plugins-locales = %{version}-%{release}
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
 BuildRequires : dolphin-dev
@@ -36,8 +36,8 @@ data components for the dolphin-plugins package.
 %package lib
 Summary: lib components for the dolphin-plugins package.
 Group: Libraries
-Requires: dolphin-plugins-data
-Requires: dolphin-plugins-license
+Requires: dolphin-plugins-data = %{version}-%{release}
+Requires: dolphin-plugins-license = %{version}-%{release}
 
 %description lib
 lib components for the dolphin-plugins package.
@@ -60,25 +60,25 @@ locales components for the dolphin-plugins package.
 
 
 %prep
-%setup -q -n dolphin-plugins-18.08.0
+%setup -q -n dolphin-plugins-18.12.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1535257852
-mkdir clr-build
+export SOURCE_DATE_EPOCH=1549903050
+mkdir -p clr-build
 pushd clr-build
 %cmake ..
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1535257852
+export SOURCE_DATE_EPOCH=1549903050
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/dolphin-plugins
-cp COPYING %{buildroot}/usr/share/doc/dolphin-plugins/COPYING
+mkdir -p %{buildroot}/usr/share/package-licenses/dolphin-plugins
+cp COPYING %{buildroot}/usr/share/package-licenses/dolphin-plugins/COPYING
 pushd clr-build
 %make_install
 popd
@@ -110,8 +110,8 @@ popd
 /usr/lib64/qt5/plugins/fileviewsvnplugin.so
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/dolphin-plugins/COPYING
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/dolphin-plugins/COPYING
 
 %files locales -f fileviewbazaarplugin.lang -f fileviewgitplugin.lang -f fileviewhgplugin.lang -f fileviewsvnplugin.lang
 %defattr(-,root,root,-)
