@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : dolphin-plugins
-Version  : 19.08.2
-Release  : 12
-URL      : https://download.kde.org/stable/applications/19.08.2/src/dolphin-plugins-19.08.2.tar.xz
-Source0  : https://download.kde.org/stable/applications/19.08.2/src/dolphin-plugins-19.08.2.tar.xz
-Source1 : https://download.kde.org/stable/applications/19.08.2/src/dolphin-plugins-19.08.2.tar.xz.sig
+Version  : 19.08.3
+Release  : 13
+URL      : https://download.kde.org/stable/applications/19.08.3/src/dolphin-plugins-19.08.3.tar.xz
+Source0  : https://download.kde.org/stable/applications/19.08.3/src/dolphin-plugins-19.08.3.tar.xz
+Source1 : https://download.kde.org/stable/applications/19.08.3/src/dolphin-plugins-19.08.3.tar.xz.sig
 Summary  : Extra Dolphin plugins
 Group    : Development/Tools
 License  : GPL-2.0
@@ -60,14 +60,14 @@ locales components for the dolphin-plugins package.
 
 
 %prep
-%setup -q -n dolphin-plugins-19.08.2
+%setup -q -n dolphin-plugins-19.08.3
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1570732839
+export SOURCE_DATE_EPOCH=1573157601
 mkdir -p clr-build
 pushd clr-build
 # -Werror is for werrorists
@@ -84,10 +84,10 @@ make  %{?_smp_mflags}  VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1570732839
+export SOURCE_DATE_EPOCH=1573157601
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/dolphin-plugins
-cp COPYING %{buildroot}/usr/share/package-licenses/dolphin-plugins/COPYING
+cp %{_builddir}/dolphin-plugins-19.08.3/COPYING %{buildroot}/usr/share/package-licenses/dolphin-plugins/7c203dee3a03037da436df03c4b25b659c073976
 pushd clr-build
 %make_install
 popd
@@ -120,7 +120,7 @@ popd
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/dolphin-plugins/COPYING
+/usr/share/package-licenses/dolphin-plugins/7c203dee3a03037da436df03c4b25b659c073976
 
 %files locales -f fileviewbazaarplugin.lang -f fileviewgitplugin.lang -f fileviewhgplugin.lang -f fileviewsvnplugin.lang
 %defattr(-,root,root,-)
